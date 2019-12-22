@@ -1,0 +1,6 @@
+# Rider
+.idea
+
+# .NET Core build folders
+[bB]in/
+[oO]bj/
