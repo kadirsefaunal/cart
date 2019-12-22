@@ -7,8 +7,8 @@ namespace Cart
 
         public Category(string title, Category parent = null)
         {
-            this._title = title;
-            this._parent = parent;
+            _title = title;
+            _parent = parent;
         }
 
         public string Title => _title;

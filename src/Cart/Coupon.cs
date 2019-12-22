@@ -10,13 +10,28 @@ namespace Cart
 
         public Coupon(double minAmount, double discountAmount, DiscountType discountType)
         {
-            this._minAmount = minAmount;
-            this._discountAmount = discountAmount;
-            this._discountType = discountType;
+            _minAmount = minAmount;
+            _discountAmount = discountAmount;
+            _discountType = discountType;
         }
 
         public double MinAmount => _minAmount;
         public double DiscountAmount => _discountAmount;
         public DiscountType DiscountType => _discountType;
+        
+        private bool IsApplicable(double totalAmount)
+        {
+            return totalAmount >= _minAmount;
+        }
+
+        public double ApplyDiscount(double totalAmount)
+        {
+            if (IsApplicable(totalAmount))
+            {
+                return _discountType.Calculate(totalAmount, _discountAmount);
+            }
+
+            return 0;
+        }
     }
 }

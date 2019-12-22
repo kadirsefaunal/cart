@@ -1,8 +1,7 @@
 namespace Cart.Type
 {
-    public enum DiscountType
+    public abstract class DiscountType
     {
-        Rate,
-        Amount
+        public abstract double Calculate(double totalAmount, double discountAmount);
     }
 }

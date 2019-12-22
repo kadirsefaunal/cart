@@ -8,9 +8,9 @@ namespace Cart
 
         public Product(string title, double amount, Category category)
         {
-            this._title = title;
-            this._amount = amount;
-            this._category = category;
+            _title = title;
+            _amount = amount;
+            _category = category;
         }
 
         public string Title => _title;
