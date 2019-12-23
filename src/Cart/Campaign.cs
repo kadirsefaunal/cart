@@ -23,6 +23,9 @@ namespace Cart
         public int Quantity => _quantity;
         public DiscountType DiscountType => _discountType;
 
+        /// <summary>
+        /// Check product count for apply discount
+        /// </summary>
         private bool IsApplicable(List<CartItem> cartItems)
         {
             int count = 0;
@@ -39,6 +42,9 @@ namespace Cart
             return count >= _quantity;
         }
 
+        /// <summary>
+        /// Apply discount to given category
+        /// </summary>
         public double ApplyDiscount(List<CartItem> cartItems)
         {
             double totalDiscount = 0;

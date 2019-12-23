@@ -1,3 +1,5 @@
+using System;
+
 namespace Cart
 {
     public class Category
@@ -13,5 +15,15 @@ namespace Cart
 
         public string Title => _title;
         public Category Parent => _parent;
+        
+        public override bool Equals(Object obj)
+        {
+            return (obj is Category) && ((Category)obj).Title == _title;
+        }
+        
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

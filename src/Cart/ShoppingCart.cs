@@ -15,6 +15,8 @@ namespace Cart
         public List<CartItem> CartItems => _cartItems;
         public List<Campaign> Campaigns => _campaigns;
         public List<Coupon> Coupons => _coupons;
+
+        public double TotalAmount => _totalAmount;
         
         public void AddItem(Product product, int quantity)
         {
@@ -49,6 +51,9 @@ namespace Cart
             }
         }
 
+        /// <summary>
+        /// Apply given discounts in given order
+        /// </summary>
         public void ApplyDiscounts(params Campaign[] campaigns)
         {
             foreach (var campaign in campaigns)
@@ -57,6 +62,9 @@ namespace Cart
             }
         }
         
+        /// <summary>
+        /// Apply coupons to car in given order
+        /// </summary>
         public void ApplyCoupons(params Coupon[] coupons)
         {
             foreach (var coupon in coupons)

@@ -19,11 +19,17 @@ namespace Cart
         public double DiscountAmount => _discountAmount;
         public DiscountType DiscountType => _discountType;
         
+        /// <summary>
+        /// Check total amount. It must be bigger than coupon min amount.
+        /// </summary>
         private bool IsApplicable(double totalAmount)
         {
             return totalAmount >= _minAmount;
         }
 
+        /// <summary>
+        /// Calculate discount amount for cart
+        /// </summary>
         public double ApplyDiscount(double totalAmount)
         {
             if (IsApplicable(totalAmount))
