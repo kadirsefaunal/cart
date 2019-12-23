@@ -6,11 +6,8 @@ namespace Cart.Type
     {
         public override double Calculate(double totalAmount, double discountAmount)
         {
-            if (discountAmount < 0 || discountAmount > totalAmount)
-            {
-                throw new DiscountAmountException();
-            }
-            
+            if (discountAmount < 0 || discountAmount > totalAmount) throw new DiscountAmountException();
+
             return discountAmount;
         }
     }

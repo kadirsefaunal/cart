@@ -7,7 +7,7 @@ namespace Cart.Tests
     public class DeliveryCostCalculatorTests
     {
         private const double FixedCost = 2.99;
-            
+
         private ShoppingCart getShoppingCart()
         {
             var category = new Category("test");
@@ -27,10 +27,10 @@ namespace Cart.Tests
         public void TestCalculateDelivery()
         {
             var cart = getShoppingCart();
-            
+
             var deliveryCostCalculator = new DeliveryCostCalculator(5, 0.7, FixedCost);
             var deliveryAmount = deliveryCostCalculator.CalculateFor(cart);
-            
+
             Assert.Equal(9.39, deliveryAmount);
         }
     }
