@@ -34,14 +34,13 @@ namespace Cart.Tests
         [Fact]
         public void TestApplyCoupon()
         {
-            var category = new Category("test");
-
             var coupon = new Coupon(1000, 150, new AmountType());
 
             var shoppingCart = getShoppingCart();
             shoppingCart.ApplyCoupons(coupon);
 
-            Assert.Equal(1050, shoppingCart.TotalAmount);
+            Assert.Equal(1050, shoppingCart.GetTotalAmountAfterDiscounts());
+            Assert.Equal(150, shoppingCart.GetCouponDiscounts());
         }
 
         [Fact]
@@ -55,7 +54,16 @@ namespace Cart.Tests
             var shoppingCart = getShoppingCart();
             shoppingCart.ApplyDiscounts(discount1, discount2);
 
-            Assert.Equal(900, shoppingCart.TotalAmount);
+            Assert.Equal(900, shoppingCart.GetTotalAmountAfterDiscounts());
+            Assert.Equal(300, shoppingCart.GetCampaingDiscount());
+        }
+
+        [Fact]
+        public void TestCartItem()
+        {
+            var cart = getShoppingCart();
+            
+            Assert.Equal("product1", cart.CartItems[0].Product.Title);
         }
     }
 }

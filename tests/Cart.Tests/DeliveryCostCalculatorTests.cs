@@ -31,7 +31,8 @@ namespace Cart.Tests
             var deliveryCostCalculator = new DeliveryCostCalculator(5, 0.7, FixedCost);
             var deliveryAmount = deliveryCostCalculator.CalculateFor(cart);
 
-            Assert.Equal(9.39, deliveryAmount);
+            Assert.Equal(9.39, cart.GetDeliveryCost());
+            Assert.Equal(deliveryAmount, cart.GetDeliveryCost());
         }
     }
 }

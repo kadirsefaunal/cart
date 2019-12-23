@@ -1,34 +1,40 @@
-﻿using Cart;
+﻿using System;
+using Cart;
 using Cart.Core;
+using Cart.Service;
 using Cart.Type;
 
 namespace App
 {
     class Program
     {
+        private const double FixedCost = 2.99;
+        
         static void Main(string[] args)
         {
-            Category category1 = new Category("test");
-            Category category2 = new Category("test2");
-
-            Product product1 = new Product("product 1", 100, category1);
-            Product product2 = new Product("product 2", 150, category1);
-            Product product3 = new Product("product 3", 60, category2);
+            var food = new Category("food");
             
-            Campaign campaign = new Campaign(category1, 10, 10, new RateType());
+            var apple = new Product("Apple", 100.0, food);
+            var almond = new Product("Almond", 150.0, food);
             
-            Coupon coupon = new Coupon(1200, 200, new AmountType());
-
-            ShoppingCart shoppingCart = new ShoppingCart();
-            shoppingCart.AddItem(product1, 2);
-            shoppingCart.AddItem(product1, 4);
-            shoppingCart.AddItem(product2, 3);
-            shoppingCart.AddItem(product3, 1);
+            var cart = new ShoppingCart();
+            cart.AddItem(apple, 3);
+            cart.AddItem(almond, 1);
             
-            shoppingCart.ApplyDiscounts(campaign);
-            shoppingCart.ApplyCoupons(coupon);
+            var campaign1 = new Campaign(food, 20.0, 3, new RateType());
+            var campaign2 = new Campaign(food, 50.0, 5, new RateType());
+            var campaign3 = new Campaign(food, 5.0, 5, new AmountType());
+            
+            cart.ApplyDiscounts(campaign1, campaign2, campaign3);
+            
+            var coupon = new Coupon(100, 10, new RateType());
 
-            var asd = shoppingCart.CartItems;
+            cart.ApplyCoupons(coupon);
+            
+            var deliveryCostCalculator = new DeliveryCostCalculator(5.0, 1.0, FixedCost);
+            var deliveryAmount = deliveryCostCalculator.CalculateFor(cart);
+            
+            cart.Print();
         }
     }
 }

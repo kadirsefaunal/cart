@@ -14,10 +14,6 @@ namespace Cart.Core
             _discountAmount = discountAmount;
             _discountType = discountType;
         }
-
-        public double MinAmount => _minAmount;
-        public double DiscountAmount => _discountAmount;
-        public DiscountType DiscountType => _discountType;
         
         /// <summary>
         /// Check total amount. It must be bigger than coupon min amount.

@@ -18,11 +18,6 @@ namespace Cart.Core
             _discountType = discountType;
         }
 
-        public Category Category => _category;
-        public double Amount => _amount;
-        public int Quantity => _quantity;
-        public DiscountType DiscountType => _discountType;
-
         /// <summary>
         /// Check product count for apply discount
         /// </summary>

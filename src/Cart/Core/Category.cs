@@ -20,10 +20,5 @@ namespace Cart.Core
         {
             return (obj is Category) && ((Category)obj).Title == _title;
         }
-        
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 }

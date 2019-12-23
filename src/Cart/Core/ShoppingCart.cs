@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cart.Core
 {
@@ -10,12 +12,19 @@ namespace Cart.Core
         
         private double _totalAmount;
         private double _totalCouponDiscount;
+        private double _deliveryCost;
 
         public List<CartItem> CartItems => _cartItems;
-        public List<Campaign> Campaigns => _campaigns;
-        public List<Coupon> Coupons => _coupons;
 
-        public double TotalAmount => _totalAmount;
+        public void SetDeliveryCost(double deliveryCost) => _deliveryCost = deliveryCost;
+        
+        public double GetTotalAmountAfterDiscounts() => _totalAmount;
+
+        public double GetCouponDiscounts() => _totalCouponDiscount;
+
+        public double GetCampaingDiscount() => _cartItems.Sum(i => i.TotalDiscount);
+
+        public double GetDeliveryCost() => _deliveryCost;
         
         public void AddItem(Product product, int quantity)
         {
@@ -72,6 +81,37 @@ namespace Cart.Core
             }
 
             _totalAmount -= _totalCouponDiscount;
+        }
+
+        public void Print()
+        {
+            var previousCategory = new Category("");
+
+            Console.WriteLine("CategoryName" 
+                              + "\t" + "ProductName" 
+                              + "\n" + "Quantity" 
+                              + "\t" + "Unit Price" 
+                              + "\t" + "Total Price (With Campaign)" 
+                              + "\t" + "Total Campaign Discount");
+            
+            foreach (var cartItem in CartItems)
+            {
+                var category = cartItem.Product.Category;
+
+                if (!category.Equals(previousCategory)) Console.Write(category.Title);
+
+                Console.WriteLine("\t" + cartItem.Product.Title 
+                                       + "\t" + cartItem.Quantity 
+                                       + "\t" + cartItem.Product.Amount 
+                                       + "\t" + cartItem.TotalAmount 
+                                       + "\t" + cartItem.TotalDiscount);
+                
+                previousCategory = category;
+            }
+
+            Console.WriteLine("Coupon discount: " + GetCouponDiscounts());
+            Console.WriteLine("Total amount: " + GetTotalAmountAfterDiscounts() 
+                                               + "\tDelivery cost: " + GetDeliveryCost());
         }
     }
 }
