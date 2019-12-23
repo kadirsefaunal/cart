@@ -1,6 +1,6 @@
 using System;
 
-namespace Cart
+namespace Cart.Core
 {
     public class Category
     {

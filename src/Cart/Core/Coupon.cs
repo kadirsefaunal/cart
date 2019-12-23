@@ -1,6 +1,6 @@
 using Cart.Type;
 
-namespace Cart
+namespace Cart.Core
 {
     public class Coupon
     {

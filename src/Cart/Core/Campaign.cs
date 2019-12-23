@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cart.Type;
 
-namespace Cart
+namespace Cart.Core
 {
     public class Campaign
     {

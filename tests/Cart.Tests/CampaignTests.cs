@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cart.Type;
+using Cart.Core;
 using Xunit;
 
 namespace Cart.Tests

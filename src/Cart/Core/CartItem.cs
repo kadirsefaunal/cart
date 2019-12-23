@@ -1,4 +1,4 @@
-namespace Cart
+namespace Cart.Core
 {
     public class CartItem
     {

@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-namespace Cart
+namespace Cart.Core
 {
     public class ShoppingCart
     {
