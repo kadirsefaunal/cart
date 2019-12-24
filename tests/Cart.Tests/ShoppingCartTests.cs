@@ -1,5 +1,8 @@
+using System;
 using System.Linq;
 using Cart.Core;
+using Cart.Service;
+using Cart.Tests.Util;
 using Cart.Type;
 using Xunit;
 
@@ -7,6 +10,8 @@ namespace Cart.Tests
 {
     public class ShoppingCartTests
     {
+        private const double FixedCost = 2.99;
+        
         private ShoppingCart getShoppingCart()
         {
             var category = new Category("test");
@@ -59,11 +64,29 @@ namespace Cart.Tests
         }
 
         [Fact]
-        public void TestCartItem()
+        public void TestPrint()
         {
             var cart = getShoppingCart();
+
+            var deliveryCostCalculator = new DeliveryCostCalculator(5, 0.7, FixedCost);
+            var deliveryAmount = deliveryCostCalculator.CalculateFor(cart);
+
+            var currentConsoleOut = Console.Out;
             
-            Assert.Equal("product1", cart.CartItems[0].Product.Title);
+            var expected = "CategoryName\tProductName\nQuantity\tUnit Price\tTotal Price (With Campaign)\tTotal Campaign Discount" 
+                           + "\ntest\tproduct1\t3\t300\t900\t0"
+                           + "\n\tproduct2\t6\t50\t300\t0"
+                           + "\nCoupon discount: 0"
+                           + "\nTotal amount: 1200\tDelivery cost: 9.39\n";
+ 
+            using (var consoleOutput = new ConsoleOutput())
+            {
+                cart.Print();
+                
+                Assert.Equal(expected, consoleOutput.GetOuput());
+            }
+            
+            Assert.Equal(currentConsoleOut, Console.Out);
         }
     }
 }
