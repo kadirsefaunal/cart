@@ -7,8 +7,6 @@ namespace Cart.Core
     public class ShoppingCart
     {
         private List<CartItem> _cartItems = new List<CartItem>();
-        private List<Campaign> _campaigns = new List<Campaign>();
-        private List<Coupon> _coupons = new List<Coupon>();
         
         private double _totalAmount;
         private double _totalCouponDiscount;
@@ -77,10 +75,11 @@ namespace Cart.Core
         {
             foreach (var coupon in coupons)
             {
-                _totalCouponDiscount += coupon.ApplyDiscount(_totalAmount);
+                var discountAmount = coupon.ApplyDiscount(_totalAmount);
+                
+                _totalCouponDiscount += discountAmount;
+                _totalAmount -= discountAmount;
             }
-
-            _totalAmount -= _totalCouponDiscount;
         }
 
         public void Print()

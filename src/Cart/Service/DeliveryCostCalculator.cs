@@ -25,7 +25,9 @@ namespace Cart.Service
             var numberOfDeliveries = GetNumberOfDeliveries(cart.CartItems);
             var numberOfProduct = GetNumberOfProduct(cart.CartItems);
 
-            var deliveryCost = _costPerDelivery * numberOfDeliveries + _costPerProduct * numberOfProduct + _fixedCost;
+            var deliveryCost = _costPerDelivery * numberOfDeliveries 
+                               + _costPerProduct * numberOfProduct 
+                               + _fixedCost;
 
             cart.SetDeliveryCost(deliveryCost);
             
