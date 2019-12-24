@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cart.Type;
 
 namespace Cart.Core
@@ -23,17 +24,11 @@ namespace Cart.Core
         /// </summary>
         private bool IsApplicable(List<CartItem> cartItems)
         {
-            int count = 0;
+            var count = cartItems
+                .Where(i => i.Product.Category.Equals(_category) ||
+                            (i.Product.Category.Parent != null && i.Product.Category.Parent.Equals(_category)))
+                .Select(c => c.Quantity).Sum();
             
-            foreach (var cartItem in cartItems)
-            {
-                if (cartItem.Product.Category.Equals(_category) 
-                    || (cartItem.Product.Category.Parent != null && cartItem.Product.Category.Parent.Equals(_category)))
-                {
-                    count += cartItem.Quantity;
-                }
-            }
-
             return count >= _quantity;
         }
 
